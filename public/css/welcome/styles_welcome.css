@@ -1,0 +1,104 @@
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #ffffff;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.mensaje-central {
+    width: 100%;
+    position: absolute;
+    top:200px;
+}
+
+.mensaje-central h1{
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+}
+.mensaje-central h3{
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+.uniremington-logo {    
+    position: absolute;
+    margin-top:10px;
+    margin-left:10px;    
+}
+
+.tic-logo {    
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+.campus-logo {    
+    position: relative;
+    text-align: center;
+}
+
+.zoom {    
+    transition: transform .5s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  .footer {
+    padding: 1.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+  }
+  .footer p:last-child {
+    margin-bottom: 0;
+  }
