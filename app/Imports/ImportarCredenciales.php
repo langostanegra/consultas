@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Illuminate\Validation\Rule;
 
-class ImportarUsuarios implements ToModel, WithHeadingRow
+class ImportarCredenciales implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row

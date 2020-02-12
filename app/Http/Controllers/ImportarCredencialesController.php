@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Excel;
 //Para importar los usuarios por medio de excel
-use App\Imports\ImportarUsuarios;
+use App\Imports\ImportarCredenciales;
 Use Validator;
 
-class ImportarUsuariosController extends Controller
+
+class ImportarCredencialesController extends Controller
 {
     public function index(){
-        return view('importar_usuarios.index');
+        return view('importar_credenciales.index');
     }
 
-    public function importar_usuarios(Request $request){          
+    public function importar_credenciales(Request $request){
         $validador = Validator::make($request->all(),[
             'file' => 'required|max:15000|mimes:xlsx,xls,csv'
         ]);
@@ -22,7 +23,7 @@ class ImportarUsuariosController extends Controller
         try {
             if($validador->passes()){
                 $file = $request->file('file');
-                Excel::import(new ImportarUsuarios, $file);
+                Excel::import(new ImportarCredenciales, $file);
                 return redirect()->back()->with(['succes'=>"Usuarios importados de forma correcta"]);
             }else{
                 return redirect()->back()->with(['errors'=>$validador->errors()->all()]);

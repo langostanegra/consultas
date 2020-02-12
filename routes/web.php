@@ -20,9 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('importar_usuarios','ImportarUsuariosController@index')->name('importar_usuarios');
+	Route::get('importar_credenciales','ImportarCredencialesController@index')->name('importar_credenciales');
 	//Ruta que envía el archivo de excel para poder ser importado
-	Route::post('importar-usuarios','ImportarUsuariosController@importar_usuarios')->name('importar.usuarios.excel');
+	Route::post('importar_credenciales','ImportarCredencialesController@importar_credenciales')->name('importar_credenciales_excel');
  });
 
 Route::group(['middleware' => 'auth'], function () {

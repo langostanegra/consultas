@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'importar_usuarios', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'importar_credenciales', 'titlePage' => __('Dashboard')])
 
 @section('content')
 <div class="content">
@@ -27,7 +27,7 @@
 
     <div class="card ">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">{{ __('Importar Usuarios') }}</h4>
+            <h4 class="card-title">{{ __('Importar Credenciales Institucionales') }}</h4>
             <!-- <p class="card-category">{{ __('User information') }}</p> -->
         </div>
         <div class="card-body ">
@@ -44,10 +44,9 @@
                 </tr>
                 <tr>
                     <!-- Botón para cargar los archivos -->
-                    <form action="{{ route ('importar.usuarios.excel')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route ('importar_credenciales_excel')}}" method="post" enctype="multipart/form-data">
                         <td>
                             {{ csrf_field() }}
-                            <!--Botón de importar usuarios-->
                             <label style="width:100%;" for="file-upload" class="btn btn-primary">
                                 <i class="fas fa-cloud-upload-alt"></i> Subir archivo
                             </label>
@@ -58,7 +57,7 @@
             </table>
             <div class="div_info" id="info"></div>
         </div>
-
+        <!--Botón de importar usuarios-->
         <div class="card-footer ml-auto mr-auto">
             <button type="submit" class="btn btn-primary">{{ __('Importar') }}</button>
         </div>
