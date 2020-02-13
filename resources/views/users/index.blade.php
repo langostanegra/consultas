@@ -14,6 +14,36 @@
                     <button type="button" id="boton_anadir_usuario"
                         class="btn btn-sm btn-primary">{{ __('Añadir usuario') }}</button>
                 </div>
+                <table id="data_table" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="cursor: pointer;"><strong>Nombre</strong></th>
+                            <th style="cursor: pointer;"><strong>Email</strong></th>
+                            <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
+                            <th style="cursor: pointer;"><strong>Acciones</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                        </tr>
+                        <tr>
+                            <td>Michael Bruce</td>
+                            <td>Javascript Developer</td>
+                            <td>Singapore</td>
+                            <td>29</td>
+                        </tr>
+                        <tr>
+                            <td>Donna Snider</td>
+                            <td>Customer Support</td>
+                            <td>New York</td>
+                            <td>27</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="card-footer text-muted">
                 Usuarios registrados
@@ -28,7 +58,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Añadir un nuevo usuario</h5>
-                <button id="limpiar_modal" style="outline:none;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="limpiar_modal" style="outline:none;" type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

@@ -4,15 +4,6 @@ function cambiar() {
     var pdrs = document.getElementById('file-upload').files[0].name;
     document.getElementById('info').innerHTML = pdrs;
 }
-// Mensaje con un sweet alert del estado de la importación de los usuarios
-$(document).on('click', '#alert', function(){
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
-})
 
 //Abrir la ventana modal de añadir un nuevo usuario
 $(document).ready(function() {
@@ -32,33 +23,64 @@ $(document).ready(function() {
 
 //Función para guardar un usuario en la base de datos
 $(document).on('click', '#anadir_usuario_db', function(){
+    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+    var token = $('input[name=_token]').val();
+    var name = $('input[name=name]').val();
+    var email = $('input[name=email]').val();
+    var password = $('input[name=password]').val();
+    // Validar si todos los campos están completos
+    if (token == "" || name == "" || email == "" || password == ""){
+        Swal.fire({
+            icon: 'info',
+            title: 'Atención',
+            text: 'Debe completar todos los campos',
+        })
+        return;
+    }
+    //Validar si un email es válido
+    if (regex.test($('#email').val().trim())) {
+        //
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: 'El correo electrónico no es válido',                
+        })
+        return;
+    }
+    
     $.ajax({
         type: "POST",        
         data: {
-            '_token': $('input[name=_token]').val(),
-            'name': $('input[name=name]').val(),
-            'email': $('input[name=email]').val(),
-            'password': $('input[name=password]').val(),
+            '_token': token,
+            'name': name,
+            'email': email,
+            'password': password,
         },
         url: 'anadir_usuario',
         success: function(data){
+            Swal.fire({
+                icon: 'success',
+                title: '¡Bien!',
+                text: 'Usuario creado de forma correcta',
+                timer: 2000,
+                showConfirmButton: false,
+              })
             $('#modal_anadir_usuario').modal('hide');
             $('input[name="name"]').val('');
             $('input[name="email"]').val('');
-            $('input[name="password"]').val('');
-            Swal.fire(
-                '!Bien!',
-                'Usuario creado de forma correcta',
-                'success'
-            )
+            $('input[name="password"]').val('');            
         },
         error: function(data){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href>Why do I have this issue?</a>'
+                text: 'Algo salió mal, intenta de nuevo',                
             })
         }
     })
 });
+
+$(document).ready( function () {
+    $('#data_table').DataTable();
+} );
