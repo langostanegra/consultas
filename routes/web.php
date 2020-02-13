@@ -22,8 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('importar_credenciales','ImportarCredencialesController@index')->name('importar_credenciales');
 	//Ruta que envía el archivo de excel para poder ser importado
-	Route::post('importar_credenciales','ImportarCredencialesController@importar_credenciales')->name('importar_credenciales_excel');
+	Route::post('importar_credenciales','ImportarCredencialesController@importar_credenciales')->name('importar_credenciales_excel');	
  });
+
+ //Ruta para añadir un usuario por medio de AJAX
+ Route::post('anadir_usuario','UserController@anadir_usuario');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);

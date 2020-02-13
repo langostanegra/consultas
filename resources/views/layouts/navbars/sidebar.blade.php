@@ -20,9 +20,9 @@
                 </a>
             </li>
 
-            <!-- Laravel examples -->
+            <!-- Opción administración -->
             <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-                <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+                <a class="nav-link collapse" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
                     <i class="material-icons">assignment</i>
                     <p>{{ __('Administración') }}
                         <b class="caret"></b>
@@ -30,29 +30,31 @@
                 </a>
                 <div class="collapse" id="laravelExample">
                     <ul class="nav">
-                        <li class="nav-item{{ $activePage == 'importar_credenciales' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('importar_credenciales') }}">
-                                <i class="material-icons">backup</i>
-                                <span class="sidebar-normal">{{ __('Importar Credenciales') }} </span>
-                            </a>
-                        </li>
+                        <!-- Gestionar usuarios -->
                         <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('user.index') }}">
                                 <span class="sidebar-mini"> UM </span>
                                 <span class="sidebar-normal"> {{ __('User Management') }} </span>
                             </a>
                         </li>
+                        <!-- Importar credenciales -->
+                        <li class="nav-item{{ $activePage == 'importar_credenciales' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('importar_credenciales') }}">
+                                <i class="material-icons">backup</i>
+                                <span class="sidebar-normal">{{ __('Importar Credenciales') }} </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                <!-- Finis Laravel examples -->
+                <!-- Finish opción Administración -->
 
                 <!-- Importar Usuarios -->
-            <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
+            <!-- <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="nav-link" href="#">
                     <i class="material-icons">import_export</i>
                     <p>{{ __('Importar Usuarios') }}</p>
                 </a>
-            </li>
+            </li> -->
             </li>
         </ul>
     </div>

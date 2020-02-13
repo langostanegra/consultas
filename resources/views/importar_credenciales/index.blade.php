@@ -48,7 +48,7 @@
                         <td>
                             {{ csrf_field() }}
                             <label style="width:100%;" for="file-upload" class="btn btn-primary">
-                                <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                                <i class="fas fa-cloud-upload-alt"></i> Cargar archivo
                             </label>
                             <input name="file" id="file-upload" onchange='cambiar()' type="file"
                                 style='display: none;' />

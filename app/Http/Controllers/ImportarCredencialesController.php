@@ -29,15 +29,17 @@ class ImportarCredencialesController extends Controller
                 return redirect()->back()->with(['errors'=>$validador->errors()->all()]);
             }
         }catch(\Exception $e){
-            // return redirect()->back()->with(['errors'=>$e]);
+            // Validación para determinar si los registros ya se encuentran en la base de datos
             if ($e instanceof \Illuminate\Database\QueryException) {
-                return redirect()->back()->with('errors', ['La plantilla contiene registros que ya se encuentran en la base de datos']);
-            }
-
-            if ($e instanceof \PhpOffice\PhpSpreadsheet\Exception) {
-                return redirect()->back()->with('errors', ['La plantilla no puede estar vacía']);
+                return redirect()->back()->with('errors', ['El archivo contiene registros que ya se encuentran en la base de datos']);
             }
             
+            // Validación para determinar si la plantilla se encuentra vacía
+            if ($e instanceof \PhpOffice\PhpSpreadsheet\Exception) {
+                return redirect()->back()->with('errors', ['El archivo no puede estar vacío']);
+            }
+            
+            //Validación para determinar si el archivo si contiene la cabezera adecuada
             if ($e instanceof \ErrorException) {
                 return redirect()->back()->with('errors', ['El archivo contiene una cabecera y/o registros inválidos']);
             }
