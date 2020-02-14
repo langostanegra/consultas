@@ -35,4 +35,8 @@ class UserController extends Controller
             ]);
         }
     }
+
+    // public function mostar_usuarios(){
+    //     return User::all();
+    // }
 }

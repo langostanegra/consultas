@@ -80,7 +80,3 @@ $(document).on('click', '#anadir_usuario_db', function(){
         }
     })
 });
-
-$(document).ready( function () {
-    $('#data_table').DataTable();
-} );

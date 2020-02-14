@@ -14,35 +14,15 @@
                     <button type="button" id="boton_anadir_usuario"
                         class="btn btn-sm btn-primary">{{ __('Añadir usuario') }}</button>
                 </div>
-                <table id="data_table" class="table table-striped table-bordered" style="width:100%">
+                <table id="data_table_usuarios" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th style="cursor: pointer;"><strong>Nombre</strong></th>
                             <th style="cursor: pointer;"><strong>Email</strong></th>
                             <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
-                            <th style="cursor: pointer;"><strong>Acciones</strong></th>
+                            <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Bruce</td>
-                            <td>Javascript Developer</td>
-                            <td>Singapore</td>
-                            <td>29</td>
-                        </tr>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
             <div class="card-footer text-muted">
@@ -88,5 +68,20 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready( function () {
+    $('#data_table_usuarios').DataTable({
+        "serverSide": true,
+        "ajax": "{{ url ('api/users')}}",
+        "columns": [
+            {data: 'name'},
+            {data: 'email'},
+            {data: 'created_at'},
+            {data: 'updated_at'},
+        ]
+    });
+} );
+</script>
 
 @endsection
