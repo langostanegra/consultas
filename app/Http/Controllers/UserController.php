@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Validator;
 use Response;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -36,7 +37,7 @@ class UserController extends Controller
         }
     }
 
-    // public function mostar_usuarios(){
-    //     return User::all();
-    // }
+    public function mostrar_usuarios(){
+        return datatables()->eloquent(User::query())->toJson();
+    }
 }

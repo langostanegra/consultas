@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
  //Ruta para añadir un usuario por medio de AJAX
  Route::post('anadir_usuario','UserController@anadir_usuario');
+ Route::get('mostrar_usuarios','UserController@mostrar_usuarios')->name('mostrar_usuarios');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('usuarios', 'UserController@index')->name('usuarios');

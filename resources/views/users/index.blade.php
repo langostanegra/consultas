@@ -73,7 +73,7 @@
 $(document).ready( function () {
     $('#data_table_usuarios').DataTable({
         "serverSide": true,
-        "ajax": "{{ url ('api/users')}}",
+        "ajax": "{{ route ('mostrar_usuarios')}}",
         "columns": [
             {data: 'name'},
             {data: 'email'},

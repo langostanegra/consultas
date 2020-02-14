@@ -13,11 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-//  Route::get('mostrar_usuarios','UserController@mostrar_usuarios')->name('mostrar_usuarios');
-Route::get('users',function(){
-    return datatables()->eloquent(App\User::query())->toJson();    
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
