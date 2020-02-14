@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
  Route::post('anadir_usuario','UserController@anadir_usuario');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::get('usuarios', 'UserController@index')->name('usuarios');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);	

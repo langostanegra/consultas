@@ -32,7 +32,7 @@
                     <ul class="nav">
                         <!-- Gestionar usuarios -->
                         <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('user.index') }}">
+                            <a class="nav-link" href="{{ route('usuarios') }}">
                                 <span class="sidebar-mini"> UM </span>
                                 <span class="sidebar-normal"> {{ __('User Management') }} </span>
                             </a>
