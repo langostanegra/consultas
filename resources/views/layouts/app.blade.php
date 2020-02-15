@@ -15,7 +15,7 @@
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
+    <!-- <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" /> -->
     <!-- SweetAlert2 -->
     <link href="{{ asset('css/sweetalert/sweetalert2.css')}}" rel="stylesheet" />
     <link href="{{ asset('css/sweetalert/sweetalert2.min.css')}}" rel="stylesheet" />
@@ -26,10 +26,10 @@
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-            </form>            
-            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+            </form>                        
+            <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>            
+            <script src="{{ asset('js/datatables/jquery.dataTables.min.js')}}"></script>
+            <script src="{{ asset('js/datatables/dataTables.bootstrap4.min.js')}}"></script>            
             @include('layouts.page_templates.auth')
         @endauth
         @guest()
@@ -38,7 +38,6 @@
 
         <!--   Core JS Files   -->        
 
-        <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
         <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>

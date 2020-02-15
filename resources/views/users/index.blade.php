@@ -21,12 +21,10 @@
                             <th style="cursor: pointer;"><strong>Email</strong></th>
                             <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
                             <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
+                            <th><strong>Acciones</strong></th>
                         </tr>
                     </thead>
                 </table>
-            </div>
-            <div class="card-footer text-muted">
-                Usuarios registrados
             </div>
         </div>
     </div>
@@ -70,18 +68,42 @@
 </div>
 
 <script>
-$(document).ready( function () {
+$(document).ready(function(){
     $('#data_table_usuarios').DataTable({
-        "serverSide": true,
-        "ajax": "{{ route ('mostrar_usuarios')}}",
-        "columns": [
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route ('mostrar_usuarios')}}",
+        columns: [
             {data: 'name'},
             {data: 'email'},
             {data: 'created_at'},
             {data: 'updated_at'},
-        ]
+            {data: 'acciones'},
+        ],
+        "language": {
+                "info": "_TOTAL_ Usuarios registrados",
+                "search": "Buscar",
+                "paginate": {
+                "next": "Siguiente",
+                "previous": "Anterior",
+            },
+            "lengthMenu": 'Mostrar <select class="form-control form-control-sm" data-style="btn btn-link">' +
+                '<option value="5">5</option>' +
+                '<option value="10">10</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '<option value="100">100</option>' +
+                '<option value="-1">Todos</option>' +
+                '<select> registros',
+            "loadingRecords": "Cargando",
+            "processing": "Procesando...",
+            "emptyTable": "No se han encontrado registros",
+            "zeroRecords": "No se han encontrado registros",
+            "infoEmpty": " Mostrando 0 de 0 registros encontrados",
+            "infoFiltered": ""
+        },
     });
-} );
+});
 </script>
 
 @endsection

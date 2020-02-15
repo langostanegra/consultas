@@ -37,7 +37,19 @@ class UserController extends Controller
         }
     }
 
-    public function mostrar_usuarios(){
-        return datatables()->eloquent(User::query())->toJson();
+    public function mostrar_usuarios(Request $request){
+        // return datatables()->eloquent(User::query())->toJson();
+        if($request->ajax()){
+            $data = User::latest()->get();
+            return Datatables::of($data)
+            ->addColumn('acciones', function($data){
+                $button = '<button type="button" name="editar" id="'.$data->id.'" class="btn btn-info"><i class="material-icons">create</i></button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="eliminar" id="'.$data->id.'" class="btn btn-danger"><i class="material-icons">delete</i></button>';
+                return $button;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
+        }
+        return view('users.index');
     }
 }
