@@ -56,8 +56,9 @@ class UserController extends Controller
         return view('users.index');
     }
 
-    public function editar_usuario(Request $request){
-        $users_data = request()->except(['_token', '_method']);
-        User::where('email', '=', $request->edit_email)->update($users_data);
+    public function editar_usuario(Request $request, $id){
+        $usuario = User::find($id);
+        $usuario->fill($request->all());
+        $usuario->save();
     }
 }

@@ -12,10 +12,12 @@ $(document).on('click', '.boton_anadir_usuario', function(){
 
 //Abrir la ventana modal de editar un nuevo usuario
 $(document).on('click', '.btn_modal_editar_usuario', function(){
-    var columna_1 = $(this).parents("tr").find("td").eq(1).text();
-    var columna_2 = $(this).parents("tr").find("td").eq(2).text();
-    var name = $('input[name="edit_name"]').val(columna_1);
-    var email = $('input[name="edit_email"]').val(columna_2);
+    var columna_name = $(this).parents("tr").find("td").eq(0).text();
+    var columna_email = $(this).parents("tr").find("td").eq(1).text();
+    var name = $('input[name="edit_name"]').val(columna_name);
+    var email = $('input[name="edit_email"]').val(columna_email);
+    let id = this.id;
+    var usuario_id = $('input[name="usuario_id"]').val(id);
     $("#modal_editar_usuario").modal();
 });
 
@@ -82,13 +84,13 @@ $(document).on('click', '#btn_anadir_usuario', function(){
 });
 
 //Función para modificar un usuario en la base de datos
-$(document).on('click', '#btn_editar_usuario', function(){
+$(document).on('click', '#btn_editar_usuario', function(){    
+    var token = $('input[name=_token]').val();
+    var usuario_id = $("#usuario_id").val();
     var name = $('input[name=edit_name]').val();
     var email = $('input[name=edit_email]').val();
-
     var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-    var token = $('input[name=_token]').val();
-
+    
      // Validar si todos los campos están completos
      if (token == "" || name == "" || email == ""){
         Swal.fire({
@@ -109,30 +111,31 @@ $(document).on('click', '#btn_editar_usuario', function(){
         return;
     }
 
+    var ruta ="editar_usuario/"+usuario_id;
     $.ajax({
-        type: "POST",
-        data: {
-            '_token': token,
+        url: ruta,
+        headers: {'X-CSRF-TOKEN': token},
+        type: "PUT",
+        data: {                    
             'name': name,
-            'email': email,            
-        },
-        url: 'editar_usuario',
+            'email': email,
+        },                
         success: function(data){
             Swal.fire({
                 icon: 'success',
                 title: '¡Bien!',
-                text: 'Usuario creado de forma correcta',
+                text: 'Usuario modificado de forma correcta',
                 timer: 2000,
                 showConfirmButton: false,
               })
             $('#modal_editar_usuario').modal('hide');
-            $('#data_table_usuarios').DataTable().ajax.reload();         
+            $('#data_table_usuarios').DataTable().ajax.reload();
         },
         error: function(data){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Algo salió mal, intenta de nuevo',                
+                text: 'Algo salió mal, intenta de nuevo',
             })
         }
     })

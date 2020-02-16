@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('User Management')])
+@extends('layouts.app', ['activePage' => 'gestionar-usuarios', 'titlePage' => __('User Management')])
 
 @section('content')
 
@@ -15,8 +15,7 @@
                 </div>
                 <table id="data_table_usuarios" class="table table-striped table-bordered" style="width:100%">
                     <thead>
-                        <tr>
-                            <th style="cursor: pointer;"><strong>ID</strong></th>
+                        <tr>                            
                             <th style="cursor: pointer;"><strong>Nombre</strong></th>
                             <th style="cursor: pointer;"><strong>Email</strong></th>
                             <th style="cursor: pointer;"><strong>Fecha de creación</strong></th>
@@ -68,14 +67,14 @@
     </div>
 </div>
 
-Modal para editar un nuevo usuario
+<!-- Modal para editar un nuevo usuario -->
 
 <div class="modal fade" id="modal_editar_usuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Añadir un nuevo usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
                 <button id="limpiar_modal" style="outline:none;" type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -84,6 +83,7 @@ Modal para editar un nuevo usuario
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <!-- Input nombre -->
+                    <input type="hidden" id="usuario_id" name="usuario_id" value="">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
                         <input type="text" class="form-control" id="edit_name" name="edit_name" required>
@@ -113,9 +113,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "{{ route ('mostrar_usuarios')}}",
-        columns: [{
-                data: 'id'
-            },
+        columns: [
             {
                 data: 'name'
             },

@@ -31,10 +31,10 @@
                 <div class="collapse" id="laravelExample">
                     <ul class="nav">
                         <!-- Gestionar usuarios -->
-                        <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+                        <li class="nav-item{{ $activePage == 'gestionar-usuarios' ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('usuarios') }}">
-                                <span class="sidebar-mini"> UM </span>
-                                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+                                <i class="material-icons">assignment_ind</i>
+                                <span class="sidebar-normal"> {{ __('Gestionar Usuarios') }} </span>
                             </a>
                         </li>
                         <!-- Importar credenciales -->
@@ -49,7 +49,7 @@
                 <!-- Finish opción Administración -->
 
                 <!-- Importar Usuarios -->
-            <!-- <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
+                <!-- <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="nav-link" href="#">
                     <i class="material-icons">import_export</i>
                     <p>{{ __('Importar Usuarios') }}</p>
