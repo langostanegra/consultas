@@ -61,4 +61,14 @@ class UserController extends Controller
         $usuario->fill($request->all());
         $usuario->save();
     }
+
+    public function eliminar_usuario($id){
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+    }
+
+    public function cambiar_password_usuario(Request $request, $id){
+            $usuario = User::find($id);        
+            $usuario->update(['password' => bcrypt($request->password)]);
+    }        
 }

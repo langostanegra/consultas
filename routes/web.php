@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
  Route::post('anadir_usuario','UserController@anadir_usuario');
  Route::get('mostrar_usuarios','UserController@mostrar_usuarios')->name('mostrar_usuarios');
  Route::put('editar_usuario/{id}','UserController@editar_usuario')->name('editar_usuario');
+ Route::get('eliminar_usuario/{id}','UserController@eliminar_usuario')->name('eliminar_usuario');
+ Route::put('cambiar_password_usuario/{id}','UserController@cambiar_password_usuario')->name('cambiar_password_usuario');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('usuarios', 'UserController@index')->name('usuarios');

@@ -46,10 +46,15 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Finish opción Administración -->
+            <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_return</i> <p>Salir</p></a>                                
+                </a>
+            </li>
+            <!-- Finish opción Administración -->
 
-                <!-- Importar Usuarios -->
-                <!-- <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
+            <!-- Importar Usuarios -->
+            <!-- <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="nav-link" href="#">
                     <i class="material-icons">import_export</i>
                     <p>{{ __('Importar Usuarios') }}</p>
