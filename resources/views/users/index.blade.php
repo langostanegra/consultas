@@ -57,7 +57,16 @@
                     <!-- Input password -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </td>
+                                <td>
+                                <i style="cursor:pointer;position:absolute;top:5px;right:1px;" id="mostrar_password_modal_anadir_usuario" class="material-icons">remove_red_eye</i>
+                                </td>
+                            </tr>
+                        </table>                        
                     </div>
                 </form>
             </div>
@@ -126,9 +135,18 @@
                     <input type="hidden" id="password_usuario_id" name="password_usuario_id" value="">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nueva contraseña</label>
-                        <input type="password" class="form-control" id="nuevo_password" name="nuevo_password"
-                            required><br><i style="cursor:pointer;" id="mostrar_password"
-                            class="material-icons">remove_red_eye</i>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <input type="password" class="form-control" id="nuevo_password" name="nuevo_password" required><br>
+                                </td>
+                                <td>
+                                    <center><i style="cursor:pointer;" id="mostrar_password_modal_cambiar_password" class="material-icons">remove_red_eye</i></center>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- <input type="password" class="form-control" id="nuevo_password" name="nuevo_password" required><br> -->
+                        <!-- <i style="cursor:pointer;" id="mostrar_password" class="material-icons">remove_red_eye</i> -->
                     </div>
                 </form>
             </div>

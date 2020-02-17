@@ -255,10 +255,9 @@ $(document).on('click', '#btn_cambiar_contraseña', function(){
     })    
 });
 
-// Función para mostrar la contraseña del input de contraseñas
-
-$(document).on('click', '#mostrar_password', function(){
-    var tipo = document.getElementById("nuevo_password");
+// Función para mostrar la contraseña del input de contraseñas del modal de añadir un nuevo usuario
+$(document).on('click', '#mostrar_password_modal_anadir_usuario', function(){
+    var tipo = document.getElementById("password");
     if(tipo.type == "password"){
         tipo.type = "text";
     }else{
@@ -266,7 +265,15 @@ $(document).on('click', '#mostrar_password', function(){
     }
 });
 
-
+// Función para mostrar la contraseña del input de contraseñas del modal de cambiar contraseña
+$(document).on('click', '#mostrar_password_modal_cambiar_password', function(){
+    var tipo = document.getElementById("nuevo_password");
+    if(tipo.type == "password"){
+        tipo.type = "text";
+    }else{
+        tipo.type = "password";
+    }
+});
 
 
 
