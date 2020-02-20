@@ -84,7 +84,8 @@
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
         <!-- Funciones de javascript propias del desarrollador -->
-        <script src="{{ asset('js/funciones.js') }}"></script>
+        <script src="{{ asset('js/ajax/funciones_usuarios.js') }}"></script>
+        <script src="{{ asset('js/ajax/funciones_gestionar_credenciales.js') }}"></script>
         @stack('js')
     </body>
 </html>

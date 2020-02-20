@@ -21,7 +21,7 @@
             </li>
 
             <!-- Opción administración -->
-            <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+            <li class="nav-item {{ ($activePage == '' || $activePage == 'user-management') ? ' active' : '' }}">
                 <a class="nav-link collapse" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
                     <i class="material-icons">assignment</i>
                     <p>{{ __('Administración') }}
@@ -44,11 +44,21 @@
                                 <span class="sidebar-normal">{{ __('Importar Credenciales') }} </span>
                             </a>
                         </li>
+                        <!-- Gestionar credenciales -->
+                        <li class="nav-item{{ $activePage == 'gestionar_credenciales' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('gestionar_credenciales') }}">
+                                <i class="material-icons">vpn_key</i>
+                                <span class="sidebar-normal">Gestionar credenciales</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="material-icons">keyboard_return</i> <p>Salir</p></a>                                
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
+                        class="material-icons">keyboard_return</i>
+                    <p>Salir</p>
+                </a>
                 </a>
             </li>
             <!-- Finish opción Administración -->

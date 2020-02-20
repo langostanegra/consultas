@@ -74,7 +74,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #6675df;
+  color: #28477b;
 }
 
 /*---------------------------------------------*/
@@ -343,7 +343,7 @@ input.input100 {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #6675df;
+  border: 1px solid #28477b;
   border-radius: 10px;
 
   visibility: hidden;
@@ -438,7 +438,7 @@ input.input100 {
   height: 18px;
   border-radius: 2px;
   background: #fff;
-  border: 1px solid #6675df;
+  border: 1px solid #28477b;
   left: 0;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -449,7 +449,7 @@ input.input100 {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #6675df;
+  color: #28477b;
 }
 
 
