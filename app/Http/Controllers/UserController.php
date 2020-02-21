@@ -16,25 +16,12 @@ class UserController extends Controller
     }
 
     
-    public function anadir_usuario(Request $req){  
-              
-        $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        );
-
-        $validator = Validator::make ($req->all(), $rules);
-
-        if ($validator->fails()){
-            return response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-        }else{
-            User::create([
-                'name' => request()->name, 
-                'email' =>  request()->email,
-                'password' => bcrypt(request()->password),
-            ]);
-        }
+    public function anadir_usuario(Request $req){                
+        User::create([
+            'name' => request()->name,
+            'email' =>  request()->email,
+            'password' => bcrypt(request()->password),
+        ]);
     }
 
     public function mostrar_usuarios(Request $request){

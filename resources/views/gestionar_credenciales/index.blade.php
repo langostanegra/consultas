@@ -2,6 +2,8 @@
 
 @section('content')
 
+<link href="{{ asset('css/checkbox.css')}}" rel="stylesheet" />
+
 <!-- Tabla que muestra todos los usuarios que cuentan con credenciales institucionales -->
 <div class="content">
     <div class="container-fluid">
@@ -34,7 +36,7 @@
     </div>
 </div>
 
-<!-- Tabla que muestra el histórico de los usuarios que han sido escalados a mesa de ayuda de Uniremington Medellín -->
+<!-- Tabla que muestra el histórico de las credenciales que han sido escalados a mesa de ayuda de Uniremington Medellín -->
 <div class="container-fluid">
     <div class="card card-nav-tabs text-left">
         <div class="card-header card-header-primary">
@@ -46,16 +48,17 @@
         <div class="card-body">
             <div class="col-12 text-right">
             </div>
-            <table id="data_table_credenciales_reportadas" class="table table-striped table-bordered"
+            <table id="data_table_revisar_credencial" class="table table-striped table-bordered"
                 style="width:100%">
                 <thead>
                     <tr>
+                        <th style="cursor: pointer;"><strong>Id</strong></th>
                         <th style="cursor: pointer;"><strong>Cédula</strong></th>
                         <th style="cursor: pointer;"><strong>Nombre</strong></th>
                         <th style="cursor: pointer;"><strong>Correo Institucional</strong></th>
                         <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
                         <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
-                        <th><strong>Acciones</strong></th>
+                        <th><strong>Estado</strong></th>
                     </tr>
                 </thead>
             </table>
@@ -107,7 +110,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="btn_anadir_usuario" type="button" class="btn btn-primary">Añadir</button>
+                <button id="btn_submit_credencial_usuario" type="button" class="btn btn-primary">Añadir</button>
             </div>
         </div>
     </div>
@@ -140,6 +143,58 @@ $(document).ready(function() {
         ],
         "language": {
             "info": "_TOTAL_ Credenciales",
+            "search": "Buscar",
+            "paginate": {
+                "next": "Siguiente",
+                "previous": "Anterior",
+            },
+            "lengthMenu": 'Mostrar <select class="form-control form-control-sm" data-style="btn btn-link">' +
+                '<option value="5">5</option>' +
+                '<option value="10">10</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '<option value="100">100</option>' +
+                '<option value="-1">Todos</option>' +
+                '<select> registros',
+            "loadingRecords": "Cargando",
+            "processing": "Procesando...",
+            "emptyTable": "No se han encontrado registros",
+            "zeroRecords": "No se han encontrado registros",
+            "infoEmpty": " Mostrando 0 de 0 registros encontrados",
+            "infoFiltered": ""
+        },
+    });
+});
+
+$(document).ready(function() {
+    $('#data_table_revisar_credencial').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route ('mostrar_credenciales_revision')}}",
+        columns: [{
+                data: 'id'
+            },
+            {
+                data: 'cedula'
+            },
+            {
+                data: 'nombre'
+            },
+            {
+                data: 'correo_institucional'
+            },
+            {
+                data: 'usuario_medellin'
+            },
+            {
+                data: 'password_medellin'
+            },
+            {
+                data: 'estado'
+            },
+        ],
+        "language": {
+            "info": "_TOTAL_ Usuarios lista de usuarios",
             "search": "Buscar",
             "paginate": {
                 "next": "Siguiente",

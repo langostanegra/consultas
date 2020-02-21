@@ -77,7 +77,7 @@ $(document).on('click', '#btn_anadir_usuario', function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Algo salió mal, intenta de nuevo',                
+                text: 'Algo salió mal',
             })
         }
     })
@@ -148,7 +148,7 @@ $(document).on('click', '#btn_editar_usuario', function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Algo salió mal, intenta de nuevo',
+                text: 'Algo salió mal',
             })
         }
     })
@@ -194,7 +194,7 @@ $(document).on('click', '.btn_modal_eliminar_usuario', function(){
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Algo salió mal, intenta de nuevo',
+                            text: 'Algo salió mal',
                         })
                     }
                 })
@@ -249,7 +249,7 @@ $(document).on('click', '#btn_cambiar_contraseña', function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Algo salió mal, intenta de nuevo',
+                text: 'Algo salió mal',
             })
         }
     })    

@@ -43,6 +43,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Grupo de rutas de gestión de credenciales
 Route::group(['middleware' => 'auth'], function () {
+	//Devolver la vista de gestión de credenciales
 	Route::get('gestionar_credenciales','GestionarCredencialesController@index')->name('gestionar_credenciales');
+	//Llamar al método mostrar credenciales para cargar la tabla donde se muestran todas las credenciales de los usuarios
 	Route::get('mostrar_credenciales','GestionarCredencialesController@mostrar_credenciales')->name('mostrar_credenciales');
+	//Mostrar las credenciales que están pendientes de revisión
+	Route::get('mostrar_credenciales_revision','GestionarCredencialesController@mostrar_credenciales_revision')->name('mostrar_credenciales_revision');
+	//Insertar una nueva credencial en la base de datos
+	Route::post('insertar_credenciales_usuario','GestionarCredencialesController@insertar_credenciales_usuario')->name('insertar_credenciales_usuario');
+	//Insertar credencial en la lista de credenciales por revisar
+	Route::post('insertar_credenciales_revisar','GestionarCredencialesController@insertar_credenciales_revisar')->name('insertar_credenciales_revisar');
+	//Ruta para cambiar el estado de una credencial que está en proceso de revisión
+	Route::put('cambiar_estado_credencial/{estado}','GestionarCredencialesController@cambiar_estado_credencial')->name('cambiar_estado_credencial');
 });
