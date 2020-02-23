@@ -21,7 +21,7 @@ class GestionarCredencialesController extends Controller
         if($request->ajax()){
             $data = Credencial::latest()->get();
             return Datatables::of($data)
-            ->addColumn('acciones', function($data){                
+            ->addColumn('acciones', function($data){
                 $button = '<a class="btn_modal_editar_credencial" name="btn_modal_editar_credencial" id="'.$data->id.'" title="Editar credenciales"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">create</i></a>';
                 // $button .= '&nbsp;&nbsp;&nbsp;<a class="btn_modal_eliminar_credencial" name="btn_modal_editar_credencial" id="'.$data->id.'" title="Eliminar credencial"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">delete</i></a>';
                 $button .= '&nbsp;&nbsp;&nbsp;<a class="btn_modal_revisar_credencial" name="btn_modal_revisar_credencial" id="'.$data->id.'" title="Enviar a revisión"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">call_made</i></a>';
@@ -55,31 +55,46 @@ class GestionarCredencialesController extends Controller
         ]);
     }
 
-    public function mostrar_credenciales_revision(Request $request){
-        // $estado = "";  
+    public function mostrar_credenciales_revision(Request $request){        
         if($request->ajax()){
             $data = CheckCredential::latest()->get();
             return Datatables::of($data)
             ->addColumn('estado', function($data){     
                 if($data->estado == 0){
-                    $estado = "";
+                    $estado = "";                    
                 }else{
                     $estado = "checked";
                 }           
-                $button2 = '<label class="switch"><input '.$estado.' type="checkbox" id="'.$data->id.'" name="checkbox_comprobar" class="checkbox_comprobar" value="'.$data->estado.'"><span class="slider round"></span></label>';
-                // <label class="switch"><input type="checkbox" id="'.$data->id.'" name="cambiar_estado_credencial"><span class="slider round"></span></label>
-                // $button .= '&nbsp;&nbsp;&nbsp;<a class="btn_modal_eliminar_credencial" name="btn_modal_editar_credencial" id="'.$data->id.'" title="Eliminar credencial"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">delete</i></a>';
-                return $button2;
+                $boton_estado = '<label class="switch"><input '.$estado.' type="checkbox" id="'.$data->id.'" name="checkbox_comprobar" class="checkbox_comprobar" value="'.$data->estado.'"><span class="slider round"></span></label>';                
+                return $boton_estado;
+            })            
+            ->addColumn('acciones', function($data){
+                if($data->anotaciones == null || $data->anotaciones == ""){
+                    $color = "#9e9e9e";
+                    $estado_nota = "Agregar nota";
+                }else{
+                    $color = "#006cc6";
+                    $estado_nota = "Ver nota";
+                }
+                $botones_acciones = '<a class="btn_modal_editar_credencial_revision" name="btn_modal_editar_credencial_revision" id="'.$data->id.'" title="Editar credenciales"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">create</i></a>';
+                $botones_acciones .= '&nbsp;<a class="btn_modal_anotacion_credencial_revision" name="btn_modal_anotacion_credencial_revision" id="'.$data->id.'" title="'.$estado_nota.'"><i class="material-icons" style="color:'.$color.';;cursor:pointer;">note_add</i></a>';
+                return $botones_acciones;
             })
-            ->rawColumns(['estado'])
+            ->rawColumns(['estado','acciones'])
             ->make(true);
         }
-        return view('gestionar_credenciales.index');
     }
 
     public function cambiar_estado_credencial(Request $request, $id){
         $credencial = CheckCredential::find($id);
         $credencial->fill($request->all());
         $credencial->save();
+    }
+
+    public function editar_credencial_usuario(Request $request, $id){        
+        $credencial_usuario = Credencial::find($id);        
+        $credencial_usuario->update(['cedula' => $request->cedula]);
+        $credencial_usuario->update(['nombre' => $request->nombre]);
+        $credencial_usuario->update(['correo_institucional' => $request->correo_institucional]);
     }
 }

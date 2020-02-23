@@ -59,6 +59,7 @@
                         <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
                         <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
                         <th><strong>Estado</strong></th>
+                        <th><strong>Acciones</strong></th>
                     </tr>
                 </thead>
             </table>
@@ -111,6 +112,46 @@
             </div>
             <div class="modal-footer">
                 <button id="btn_submit_credencial_usuario" type="button" class="btn btn-primary">Añadir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para modificar una credencial de usuario -->
+<div class="modal fade" id="modal_editar_credencial_usuario" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar credencial de usuario</h5>
+                <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
+                    data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">      
+                    <input type="hidden" id="credencial_id" value="" name="credencial_id">
+                    <!-- Input cedula -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Cédula</label>
+                        <input type="text" class="form-control" id="editar_cedula" name="editar_cedula" required>
+                    </div>
+                    <!-- Input nombre -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" class="form-control" id="editar_nombre" name="editar_nombre" required>
+                    </div>
+                    <!-- Input correo institucional -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo institucional</label>
+                        <input type="text" class="form-control" id="editar_correo_institucional" name="editar_correo_institucional"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_submit_editar_credencial_usuario" type="button" class="btn btn-primary">Añadir</button>
             </div>
         </div>
     </div>
@@ -192,9 +233,12 @@ $(document).ready(function() {
             {
                 data: 'estado'
             },
+            {
+                data: 'acciones'
+            },
         ],
         "language": {
-            "info": "_TOTAL_ Usuarios lista de usuarios",
+            "info": "_TOTAL_ Usuarios en la lista de revisión",
             "search": "Buscar",
             "paginate": {
                 "next": "Siguiente",

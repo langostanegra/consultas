@@ -31,7 +31,7 @@ class ImportarCredencialesController extends Controller
         }catch(\Exception $e){
             // Validación para determinar si los registros ya se encuentran en la base de datos
             if ($e instanceof \Illuminate\Database\QueryException) {
-                return redirect()->back()->with('errors', ['El archivo contiene registros que ya se encuentran en la base de datos']);
+                return redirect()->back()->with('errors', ['El archivo contiene registros que ya se encuentran en la base de datos o el archivo tiene datos duplicados']);
             }
             
             // Validación para determinar si la plantilla se encuentra vacía

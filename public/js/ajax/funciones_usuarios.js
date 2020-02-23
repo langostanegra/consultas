@@ -66,12 +66,12 @@ $(document).on('click', '#btn_anadir_usuario', function(){
                 text: 'Usuario creado de forma correcta',
                 timer: 2000,
                 showConfirmButton: false,
-              })
+              })            
             $('#modal_anadir_usuario').modal('hide');
-            $('#data_table_usuarios').DataTable().ajax.reload();            
+            $('#data_table_usuarios').DataTable().ajax.reload();
             $('input[name="name"]').val('');
             $('input[name="email"]').val('');
-            $('input[name="password"]').val('');            
+            $('input[name="password"]').val('');
         },
         error: function(data){
             Swal.fire({
@@ -91,7 +91,7 @@ $(document).on('click', '.btn_modal_editar_usuario', function(){
     var columna_email = $(this).parents("tr").find("td").eq(1).text();
     $('input[name="edit_name"]').val(columna_name);
     $('input[name="edit_email"]').val(columna_email);
-    let id = this.id;
+    let id = this.id;    
     $('input[name="usuario_id"]').val(id);
     $("#modal_editar_usuario").modal();
 });
@@ -140,9 +140,9 @@ $(document).on('click', '#btn_editar_usuario', function(){
                 text: 'Usuario modificado de forma correcta',
                 timer: 2000,
                 showConfirmButton: false,
-              })
+              })              
             $('#modal_editar_usuario').modal('hide');
-            $('#data_table_usuarios').DataTable().ajax.reload();
+            $('#data_table_usuarios').DataTable().ajax.reload();            
         },
         error: function(data){
             Swal.fire({

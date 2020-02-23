@@ -98,12 +98,11 @@ $(document).on('click', '.btn_modal_revisar_credencial', function () {
     var estado = 0;
 
     Swal.fire({
-        title: '¡Ey!',
-        text: "¿Realmente quieres pasar estas credenciales a revisión?",
+        html: '<p style="font-size:18px;"><strong>Estudiante: </strong> '+columna_nombre +'</p><p style="font-size:18px;">¿Realmente quieres pasar estas credenciales a revisión?</p>',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#00457e',
-        cancelButtonColor: '#e3001b',
+        confirmButtonColor: '#1784ff',
+        cancelButtonColor: '#c5c5c5',
         confirmButtonText: "Si",
         cancelButtonText: "No"
     }).then((result) => {
@@ -133,8 +132,7 @@ $(document).on('click', '.btn_modal_revisar_credencial', function () {
                 error: function (data) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo salió mal',
+                        html: '<p style="font-size:18px;">El estudiante <strong> '+columna_nombre +'</strong></p><p style="font-size:18px;">Ya se encuentra registrado en la lista de revisión</p>',
                     })
                 }
             })
@@ -149,7 +147,7 @@ $(document).on('click', '.checkbox_comprobar', function () {
     var token = $('input[name=_token]').val();
 
     if ($(this).is(':checked')) {
-        // Hacer algo si el checkbox ha sido seleccionado        
+        // Hacer algo si el checkbox ha sido seleccionado
         var estado = 1;
         var ruta = "cambiar_estado_credencial/" + id;
         $.ajax({
@@ -205,4 +203,81 @@ $(document).on('click', '.checkbox_comprobar', function () {
             }
         })
     }
+});
+
+//Abrir la ventana modal de editar una credencial de usuario
+/*Recordar que al dar clic en el botón del lápiz, la función recolecta todos los datos
+para luego poder ser enviados por el método put al controlado*/
+$(document).on('click', '.btn_modal_editar_credencial', function () {
+    var columna_cedula = $(this).parents("tr").find("td").eq(0).text();
+    var columna_nombre = $(this).parents("tr").find("td").eq(1).text();
+    var columna_correo_institucional = $(this).parents("tr").find("td").eq(2).text();
+    $('input[name="editar_cedula"]').val(columna_cedula);
+    $('input[name="editar_nombre"]').val(columna_nombre);
+    $('input[name="editar_correo_institucional"]').val(columna_correo_institucional);
+    let id = this.id;    
+    $('input[name="credencial_id"]').val(id);
+    $("#modal_editar_credencial_usuario").modal();
+});
+
+// Función para modificiar una credencial de usuario
+$(document).on('click', '#btn_submit_editar_credencial_usuario ', function () {
+    var token = $('input[name=_token]').val();
+    var credencial_id = $("#credencial_id").val();
+    var cedula = $('input[name=editar_cedula]').val();
+    var nombre = $('input[name=editar_nombre]').val();
+    var correo_institucional = $('input[name=editar_correo_institucional]').val();
+    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+    // Validar si todos los campos están completos
+    if (token == "" || credencial_id == "" || cedula == "" || nombre == "" || correo_institucional == "") {
+        Swal.fire({
+            icon: 'info',
+            title: 'Atención',
+            text: 'Debe completar todos los campos',
+        })
+        return;
+    }
+
+    //Validar correo institucional
+    if (regex.test($('#editar_correo_institucional').val().trim())) {
+        //
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: 'El correo electrónico institucional9 no es válido',
+        })
+        return;
+    }
+
+    var ruta = "editar_credencial_usuario/" + credencial_id;
+    $.ajax({
+        url: ruta,
+        headers: { 'X-CSRF-TOKEN': token },
+        type: "PUT",
+        data: {
+            'cedula': cedula,
+            'nombre': nombre,
+            'correo_institucional': correo_institucional,
+        },
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Bien!',
+                text: 'Datos de usuario modificados de forma correcta',
+                timer: 2000,
+                showConfirmButton: false,
+            })
+            $('#modal_editar_credencial_usuario').modal('hide');
+            $('#data_table_credenciales').DataTable().ajax.reload();
+        },
+        error: function (data) {            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo salió mal',
+            })
+        }
+    })
 });
