@@ -95,10 +95,25 @@ $(document).on('click', '.btn_modal_revisar_credencial', function () {
     var columna_correo_institucional = $(this).parents("tr").find("td").eq(2).text();
     var columna_usuario_medellin = $(this).parents("tr").find("td").eq(3).text();
     var columna_password_medellin = $(this).parents("tr").find("td").eq(4).text();
+    //Capturar la fecha actual
+    var fecha_inicio = new Date();
+    var dd = fecha_inicio.getDate();
+    var mm = fecha_inicio.getMonth() + 1;
+    var yyyy = fecha_inicio.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd;
+    } 
+     
+    if(mm<10) {
+        mm='0'+mm;
+    }
+
+    fecha_inicio = yyyy+'/'+mm+'/'+dd;    
     var estado = 0;
 
     Swal.fire({
-        html: '<p style="font-size:18px;"><strong>Estudiante: </strong> '+columna_nombre +'</p><p style="font-size:18px;">¿Realmente quieres pasar estas credenciales a revisión?</p>',
+        html: '<p style="font-size:18px;"><strong>Estudiante: </strong> ' + columna_nombre + '</p><p style="font-size:18px;">¿Realmente quieres pasar estas credenciales a revisión?</p>',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#1784ff',
@@ -118,12 +133,13 @@ $(document).on('click', '.btn_modal_revisar_credencial', function () {
                     'usuario_medellin': columna_usuario_medellin,
                     'password_medellin': columna_password_medellin,
                     'estado': estado,
+                    'fecha_inicio': fecha_inicio,
                 },
                 success: function (data) {
                     Swal.fire({
                         icon: 'success',
                         title: '¡Bien!',
-                        text: 'Usuario registrado en la lista de revisión',
+                        text: 'Credenciales registradas en la lista de revisión',
                         timer: 2000,
                         showConfirmButton: false,
                     })
@@ -132,7 +148,7 @@ $(document).on('click', '.btn_modal_revisar_credencial', function () {
                 error: function (data) {
                     Swal.fire({
                         icon: 'error',
-                        html: '<p style="font-size:18px;">El estudiante <strong> '+columna_nombre +'</strong></p><p style="font-size:18px;">Ya se encuentra registrado en la lista de revisión</p>',
+                        html: '<p style="font-size:18px;">El estudiante <strong> ' + columna_nombre + '</strong></p><p style="font-size:18px;">Ya se encuentra registrado en la lista de revisión</p>',
                     })
                 }
             })
@@ -148,6 +164,22 @@ $(document).on('click', '.checkbox_comprobar', function () {
 
     if ($(this).is(':checked')) {
         // Hacer algo si el checkbox ha sido seleccionado
+        var fecha_fin = new Date();
+        var dd = fecha_fin.getDate();
+        var mm = fecha_fin.getMonth() + 1;
+        var yyyy = fecha_fin.getFullYear();
+    
+        if(dd<10) {
+            dd='0'+dd;
+        } 
+         
+        if(mm<10) {
+            mm='0'+mm;
+        }
+    
+        fecha_fin = yyyy+'/'+mm+'/'+dd;        
+        console.log(fecha_fin);
+
         var estado = 1;
         var ruta = "cambiar_estado_credencial/" + id;
         $.ajax({
@@ -156,6 +188,7 @@ $(document).on('click', '.checkbox_comprobar', function () {
             type: "PUT",
             data: {
                 'estado': estado,
+                'fecha_fin': fecha_fin,
             },
             success: function (data) {
                 Swal.fire({
@@ -165,7 +198,9 @@ $(document).on('click', '.checkbox_comprobar', function () {
                     showConfirmButton: false,
                     timer: 3000
                 })
+                $('#data_table_revisar_credencial').DataTable().ajax.reload();
             },
+
             error: function (data) {
                 Swal.fire({
                     icon: 'error',
@@ -177,6 +212,8 @@ $(document).on('click', '.checkbox_comprobar', function () {
     } else {
         // Hacer algo si el checkbox ha sido deseleccionado
         var estado = 0;
+        var fecha_inicio = null;
+
         var ruta = "cambiar_estado_credencial/" + id;
         $.ajax({
             url: ruta,
@@ -184,6 +221,7 @@ $(document).on('click', '.checkbox_comprobar', function () {
             type: "PUT",
             data: {
                 'estado': estado,
+                'fecha_fin': fecha_fin,
             },
             success: function (data) {
                 Swal.fire({
@@ -193,6 +231,7 @@ $(document).on('click', '.checkbox_comprobar', function () {
                     showConfirmButton: false,
                     timer: 3000
                 })
+                $('#data_table_revisar_credencial').DataTable().ajax.reload();
             },
             error: function (data) {
                 Swal.fire({
@@ -215,7 +254,7 @@ $(document).on('click', '.btn_modal_editar_credencial', function () {
     $('input[name="editar_cedula"]').val(columna_cedula);
     $('input[name="editar_nombre"]').val(columna_nombre);
     $('input[name="editar_correo_institucional"]').val(columna_correo_institucional);
-    let id = this.id;    
+    let id = this.id;
     $('input[name="credencial_id"]').val(id);
     $("#modal_editar_credencial_usuario").modal();
 });
@@ -272,7 +311,7 @@ $(document).on('click', '#btn_submit_editar_credencial_usuario ', function () {
             $('#modal_editar_credencial_usuario').modal('hide');
             $('#data_table_credenciales').DataTable().ajax.reload();
         },
-        error: function (data) {            
+        error: function (data) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -280,4 +319,9 @@ $(document).on('click', '#btn_submit_editar_credencial_usuario ', function () {
             })
         }
     })
+});
+
+// Función para abrir la ventana modal que agrega una nota en la tabla de las credenciales en revisión
+$(document).on('click', '.btn_modal_nota_credencial_revision', function () {
+    $("#modal_nota_credencial_revision").modal();
 });

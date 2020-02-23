@@ -48,18 +48,18 @@
         <div class="card-body">
             <div class="col-12 text-right">
             </div>
-            <table id="data_table_revisar_credencial" class="table table-striped table-bordered"
-                style="width:100%">
+            <table id="data_table_revisar_credencial" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th style="cursor: pointer;"><strong>Id</strong></th>
                         <th style="cursor: pointer;"><strong>Cédula</strong></th>
-                        <th style="cursor: pointer;"><strong>Nombre</strong></th>
-                        <th style="cursor: pointer;"><strong>Correo Institucional</strong></th>
+                        <th style="cursor: pointer;"><strong>Nombre</strong></th>                        
                         <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
                         <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
+                        <th style="cursor: pointer;"><strong>Reportado</strong></th>
+                        <th style="cursor: pointer;"><strong>Finalizado</strong></th>
                         <th><strong>Estado</strong></th>
-                        <th><strong>Acciones</strong></th>
+                        <th><strong>Acciones</strong></th>  
                     </tr>
                 </thead>
             </table>
@@ -130,7 +130,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form">      
+                <form class="form-horizontal" role="form">
                     <input type="hidden" id="credencial_id" value="" name="credencial_id">
                     <!-- Input cedula -->
                     <div class="form-group">
@@ -145,13 +145,41 @@
                     <!-- Input correo institucional -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Correo institucional</label>
-                        <input type="text" class="form-control" id="editar_correo_institucional" name="editar_correo_institucional"
-                            required>
+                        <input type="text" class="form-control" id="editar_correo_institucional"
+                            name="editar_correo_institucional" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button id="btn_submit_editar_credencial_usuario" type="button" class="btn btn-primary">Añadir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar una nueva nota de una credencial en revision -->
+<div class="modal fade" id="modal_nota_credencial_revision" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Añadir una nueva nota</h5>
+                <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
+                    data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" id="credencial_nota_id" value="" name="credencial_nota_id">
+                    <!-- textarea para añadir una nueva nota  -->
+                    <div class="form-group">                        
+                        <textarea rows="4" cols="50" class="form-control" id="nota_credencial_revision" name="nota_credencial_revision" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_submit_nota_credencial_revision" type="button" class="btn btn-primary">Añadir</button>
             </div>
         </div>
     </div>
@@ -220,15 +248,18 @@ $(document).ready(function() {
             },
             {
                 data: 'nombre'
-            },
-            {
-                data: 'correo_institucional'
-            },
+            },            
             {
                 data: 'usuario_medellin'
             },
             {
                 data: 'password_medellin'
+            },
+            {
+                data: 'fecha_inicio'
+            },
+            {
+                data: 'fecha_fin'
             },
             {
                 data: 'estado'

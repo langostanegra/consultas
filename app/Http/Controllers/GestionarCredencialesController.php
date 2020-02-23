@@ -52,6 +52,7 @@ class GestionarCredencialesController extends Controller
             'usuario_medellin' =>  request()->usuario_medellin,
             'password_medellin' =>  request()->password_medellin,
             'estado' =>  request()->estado,
+            'fecha_inicio' =>  date(request()->fecha_inicio),
         ]);
     }
 
@@ -61,11 +62,13 @@ class GestionarCredencialesController extends Controller
             return Datatables::of($data)
             ->addColumn('estado', function($data){     
                 if($data->estado == 0){
-                    $estado = "";                    
+                    $estado = "";
+                    $title = "En proceso";
                 }else{
                     $estado = "checked";
+                    $title = "Proceso finalizado";
                 }           
-                $boton_estado = '<label class="switch"><input '.$estado.' type="checkbox" id="'.$data->id.'" name="checkbox_comprobar" class="checkbox_comprobar" value="'.$data->estado.'"><span class="slider round"></span></label>';                
+                $boton_estado = '<label title="'.$title.'" class="switch"><input '.$estado.' type="checkbox" id="'.$data->id.'" name="checkbox_comprobar" class="checkbox_comprobar" value="'.$data->estado.'"><span class="slider round"></span></label>';                
                 return $boton_estado;
             })            
             ->addColumn('acciones', function($data){
@@ -77,7 +80,7 @@ class GestionarCredencialesController extends Controller
                     $estado_nota = "Ver nota";
                 }
                 $botones_acciones = '<a class="btn_modal_editar_credencial_revision" name="btn_modal_editar_credencial_revision" id="'.$data->id.'" title="Editar credenciales"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">create</i></a>';
-                $botones_acciones .= '&nbsp;<a class="btn_modal_anotacion_credencial_revision" name="btn_modal_anotacion_credencial_revision" id="'.$data->id.'" title="'.$estado_nota.'"><i class="material-icons" style="color:'.$color.';;cursor:pointer;">note_add</i></a>';
+                $botones_acciones .= '&nbsp;<a class="btn_modal_nota_credencial_revision" name="btn_modal_anotacion_credencial_revision" id="'.$data->id.'" title="'.$estado_nota.'"><i class="material-icons" style="color:'.$color.';;cursor:pointer;">note_add</i></a>';
                 return $botones_acciones;
             })
             ->rawColumns(['estado','acciones'])
@@ -86,9 +89,12 @@ class GestionarCredencialesController extends Controller
     }
 
     public function cambiar_estado_credencial(Request $request, $id){
+        // $credencial = CheckCredential::find($id);
+        // $credencial->fill($request->all());
+        // $credencial->save();
         $credencial = CheckCredential::find($id);
-        $credencial->fill($request->all());
-        $credencial->save();
+        $credencial->update(['estado' => $request->estado]);
+        $credencial->update(['fecha_fin' => $request->fecha_fin]);
     }
 
     public function editar_credencial_usuario(Request $request, $id){        
