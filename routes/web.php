@@ -53,6 +53,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('insertar_credenciales_usuario','GestionarCredencialesController@insertar_credenciales_usuario')->name('insertar_credenciales_usuario');
 	//Editar una credencial de usuario
 	Route::put('editar_credencial_usuario/{id}','GestionarCredencialesController@editar_credencial_usuario')->name('editar_credencial_usuario');
+	//Actualizar las dos tablas de credencialaes cuando se actualice una credencial UNIREMINGTON
+	Route::post('editar_credencial_usuario_revisar','GestionarCredencialesController@editar_credencial_usuario_revisar')->name('editar_credencial_usuario_revisar');
+	//Ruta para añadir una nota en una credencial que está en estado de revisión
+	Route::put('anadir_nota_credencial/{id}','GestionarCredencialesController@anadir_nota_credencial')->name('anadir_nota_credencial');
+	//Ruta para maquetear el email
+	Route::put('maquetear_correo_electronico/{id}','GestionarCredencialesController@maquetear_correo_electronico')->name('maquetear_correo_electronico');
+	//Pintar mensaje dinámico
+	Route::get('pintar_mensaje_dinamico','GestionarCredencialesController@pintar_mensaje_dinamico')->name('pintar_mensaje_dinamico');
 	//Insertar credencial en la lista de credenciales por revisar
 	Route::post('insertar_credenciales_revisar','GestionarCredencialesController@insertar_credenciales_revisar')->name('insertar_credenciales_revisar');
 	//Ruta para cambiar el estado de una credencial que está en proceso de revisión

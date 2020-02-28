@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Credencial;
 use App\CheckCredential;
+use App\MakeEmailTemplate;
 use DataTables;
 use Validator;
 use Response;
+use DB;
 
 class GestionarCredencialesController extends Controller
 {
     public function index(){
-        return view('gestionar_credenciales.index');
+        $plantilla_correo = MakeEmailTemplate::select('plantilla')->where('id', 1)->get();
+        return view('gestionar_credenciales.index')->with(compact('plantilla_correo'));
     }
 
     public function mostrar_credenciales(Request $request){
@@ -72,7 +75,7 @@ class GestionarCredencialesController extends Controller
                 return $boton_estado;
             })            
             ->addColumn('acciones', function($data){
-                if($data->anotaciones == null || $data->anotaciones == ""){
+                if($data->nota == null || $data->nota == ""){
                     $color = "#9e9e9e";
                     $estado_nota = "Agregar nota";
                 }else{
@@ -80,7 +83,8 @@ class GestionarCredencialesController extends Controller
                     $estado_nota = "Ver nota";
                 }
                 $botones_acciones = '<a class="btn_modal_editar_credencial_revision" name="btn_modal_editar_credencial_revision" id="'.$data->id.'" title="Editar credenciales"><i class="material-icons" style="color:#9e9e9e;;cursor:pointer;">create</i></a>';
-                $botones_acciones .= '&nbsp;<a class="btn_modal_nota_credencial_revision" name="btn_modal_anotacion_credencial_revision" id="'.$data->id.'" title="'.$estado_nota.'"><i class="material-icons" style="color:'.$color.';;cursor:pointer;">note_add</i></a>';
+                $botones_acciones .= '&nbsp;<a class="btn_modal_nota_credencial_revision" name="btn_modal_anotacion_credencial_revision" id="btn_modal_nota_credencial_revision" title="'.$estado_nota.'" data-value="'.$data->nota.'"><i class="material-icons" style="color:'.$color.';;cursor:pointer;">note_add</i></a>';
+                $botones_acciones .= '&nbsp;<a title="Maquetar correo electrónico" class="btn_modal_maquetar_correo_electronico" name="btn_modal_maquetar_correo_electronico" id="btn_modal_maquetar_correo_electronico" data-value=""><i class="material-icons" style="color:#9e9e9e;cursor:pointer;">email</i></a>';
                 return $botones_acciones;
             })
             ->rawColumns(['estado','acciones'])
@@ -102,5 +106,38 @@ class GestionarCredencialesController extends Controller
         $credencial_usuario->update(['cedula' => $request->cedula]);
         $credencial_usuario->update(['nombre' => $request->nombre]);
         $credencial_usuario->update(['correo_institucional' => $request->correo_institucional]);
+    }
+
+    public function editar_credencial_usuario_revisar(Request $request){        
+        $data = DB::select('call ActualizarTablasCredenciales(?, ?, ?)', array($request->cedula, $request->usuario_medellin, $request->password_medellin));
+    }
+
+    public function anadir_nota_credencial(Request $request, $id){            
+        $nota = CheckCredential::find($id);        
+        $nota->update(['nota' => $request->nota]);
+    }
+
+    public function maquetear_correo_electronico(Request $request, $id){
+        $correo_elctronico = MakeEmailTemplate::find($id);
+        $correo_elctronico->update(['plantilla' => $request->plantilla]);               
+    }
+
+    public function pintar_mensaje_dinamico(Request $request){
+        //Plantilla
+        $str = MakeEmailTemplate::select('plantilla')->where('id', 1)->get()->toArray();
+        $array = $str[0];
+        $str = $array['plantilla'];
+
+        //Datos del usuario
+        $datos_usuario = CheckCredential::select()->where('cedula', $request->cedula)->get()->toArray();
+        $array = $datos_usuario[0];
+        $new_array = array();
+        
+        foreach($array as $clave => $valor){
+            $new_array["##".$clave."##"] = $valor;
+        }        
+        
+        $mensaje_final = str_replace(array_keys($new_array), $new_array, $str);
+        return $mensaje_final;
     }
 }

@@ -3,38 +3,36 @@
 @section('content')
 
 <link href="{{ asset('css/checkbox.css')}}" rel="stylesheet" />
-
+<br><br><br><br>
 <!-- Tabla que muestra todos los usuarios que cuentan con credenciales institucionales -->
-<div class="content">
-    <div class="container-fluid">
-        <div class="card card-nav-tabs text-left">
-            <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{ __('Gestionar credenciales de usuario') }}</h4>
-                <p class="card-category">Acá podrás gestionar todas las credenciales de la <strong>Biblioteca
-                        Virtual</strong> y <strong>Correo General</strong> de estudiantes, docentes y adminitrativos.
-                </p>
+<div class="container-fluid">
+    <div class="card card-nav-tabs text-left">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">{{ __('Gestionar credenciales de usuario') }}</h4>
+            <p class="card-category">Acá podrás gestionar todas las credenciales de la <strong>Biblioteca
+                    Virtual</strong> y <strong>Correo General</strong> de estudiantes, docentes y adminitrativos.
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="col-12 text-right">
+                <button type="button"
+                    class="btn btn-sm btn-primary boton_anadir_credencial_usuario">{{ __('Añadir credencial') }}</button>
             </div>
-            <div class="card-body">
-                <div class="col-12 text-right">
-                    <button type="button"
-                        class="btn btn-sm btn-primary boton_anadir_credencial_usuario">{{ __('Añadir credencial') }}</button>
-                </div>
-                <table id="data_table_credenciales" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th style="cursor: pointer;"><strong>Cédula</strong></th>
-                            <th style="cursor: pointer;"><strong>Nombre</strong></th>
-                            <th style="cursor: pointer;"><strong>Correo Institucional</strong></th>
-                            <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
-                            <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
-                            <th><strong>Acciones</strong></th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            <table id="data_table_credenciales" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="cursor: pointer;"><strong>Cédula</strong></th>
+                        <th style="cursor: pointer;"><strong>Nombre</strong></th>
+                        <th style="cursor: pointer;"><strong>Correo Institucional</strong></th>
+                        <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
+                        <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
+                        <th><strong>Acciones</strong></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
-</div>
+</div><br><br>
 
 <!-- Tabla que muestra el histórico de las credenciales que han sido escalados a mesa de ayuda de Uniremington Medellín -->
 <div class="container-fluid">
@@ -53,17 +51,65 @@
                     <tr>
                         <th style="cursor: pointer;"><strong>Id</strong></th>
                         <th style="cursor: pointer;"><strong>Cédula</strong></th>
-                        <th style="cursor: pointer;"><strong>Nombre</strong></th>                        
+                        <th style="cursor: pointer;"><strong>Nombre</strong></th>
                         <th style="cursor: pointer;"><strong>Usuario Medellín</strong></th>
                         <th style="cursor: pointer;"><strong>Contraseña Medellín</strong></th>
                         <th style="cursor: pointer;"><strong>Reportado</strong></th>
                         <th style="cursor: pointer;"><strong>Finalizado</strong></th>
                         <th><strong>Estado</strong></th>
-                        <th><strong>Acciones</strong></th>  
+                        <th WIDTH="100"><strong>
+                                <center>Acciones</center>
+                            </strong></th>
                     </tr>
                 </thead>
             </table>
         </div>
+    </div>
+</div><br><br>
+
+<!-- Zona para maquetar el correo electrónico que se envía a mesa de ayuda con los datos personales de los estudiantes -->
+<div class="container-fluid">
+    <div class="card card-nav-tabs text-left">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">{{ __('Maquetar plantilla de correo electrónico') }}</h4>
+            <p class="card-category">Acá podrá realizar un correo dinámico que proporcionará agilidad al momento de
+                enviar información a mesa de ayuda
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="col-12 text-right">
+            </div>
+            <label>Redactar mensaje dinámico</label>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Variables
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a style="cursor:pointer;" class="dropdown-item" data-value="##cedula##"
+                        id="variable_mensaje_dinamico">Cedula</a>
+                    <a style="cursor:pointer;" class="dropdown-item" data-value="##nombre##"
+                        id="variable_mensaje_dinamico">Nombre</a>
+                    <a style="cursor:pointer;" class="dropdown-item" data-value="##correo_institucional##"
+                        id="variable_mensaje_dinamico">Correo Institucional</a>
+                    <a style="cursor:pointer;" class="dropdown-item" data-value="##usuario_medellin##"
+                        id="variable_mensaje_dinamico">Usuario Medellín</a>
+                    <a style="cursor:pointer;" class="dropdown-item" data-value="##password_medellin##"
+                        id="variable_mensaje_dinamico">Password Medellín</a>
+                </div>
+            </div>
+            <form class="form-horizontal" role="form">
+                <textarea maxlength="1000" rows="10" cols="100" class="form-control" id="mensaje_dinamico"
+                    name="mensaje_dinamico" value=""
+                    required>@foreach($plantilla_correo as $plantillas){{$plantillas->plantilla}}@endforeach</textarea>
+        </div>
+        <div class="container-fluid">
+            <div class="col-12 text-right">
+                <button type="button" class="btn btn btn-primary btn_submit_mensaje_dinamico">Crear</button>
+            </div>
+        </div><br>
+        </form>
     </div>
 </div>
 
@@ -74,7 +120,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Añadir una nueva credencial de usuario</h5>
-                <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
+                <button id="limpiar_modal_anadir_credencial" style="outline:none;" type="button" class="close"
                     data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -123,7 +169,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar credencial de usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar información del usuario</h5>
                 <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
                     data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -151,7 +197,46 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="btn_submit_editar_credencial_usuario" type="button" class="btn btn-primary">Añadir</button>
+                <button id="btn_submit_editar_credencial_usuario" type="button"
+                    class="btn btn-primary">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para modificar una credencial de usuario que está en la tabla de revisón -->
+<div class="modal fade" id="modal_editar_credencial_revisar" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar credenciales de usuario Uniremington</h5>
+                <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
+                    data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" id="cedula_credencial_revisar" name="cedula_credencial_revisar">
+                    <input type="hidden" id="credencial_revisar_id" value="" name="credencial_revisar_id">
+                    <!-- Input del correo electrónico institucional -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo Uniremington Medellín</label>
+                        <input type="text" class="form-control" id="editar_usuario_medellin_revisar"
+                            name="editar_usuario_medellin_revisar" required>
+                    </div>
+                    <!-- Input del password medellín -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Password Medellín</label>
+                        <input type="text" class="form-control" id="editar_password_medellin_revisar"
+                            name="editar_password_medellin_revisar" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_submit_editar_credencial_revisar" type="button"
+                    class="btn btn-primary">Actualizar</button>
             </div>
         </div>
     </div>
@@ -163,8 +248,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Añadir una nueva nota</h5>
-                <button id="limpiar_modal_usuarios" style="outline:none;" type="button" class="close"
+                <h5 class="modal-title" id="exampleModalLabel">Nota</h5>
+                <button id="limpiar_modal_anadir_nota" style="outline:none;" type="button" class="close"
                     data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -172,14 +257,41 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <input type="hidden" id="credencial_nota_id" value="" name="credencial_nota_id">
-                    <!-- textarea para añadir una nueva nota  -->
-                    <div class="form-group">                        
-                        <textarea rows="4" cols="50" class="form-control" id="nota_credencial_revision" name="nota_credencial_revision" required></textarea>
+                    <div class="form-group">
+                        <!-- textarea para añadir una nueva nota  -->
+                        <textarea maxlength="250" rows="4" cols="50" class="form-control" id="nota_credencial_revision"
+                            name="nota_credencial_revision" value="" required></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button id="btn_submit_nota_credencial_revision" type="button" class="btn btn-primary">Añadir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para mostrar el correo electrónico que se emviará a mesa de ayuda de Medellín -->
+<div class="modal fade" id="modal_correo_maquetado" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Correo electrónico para mesa de ayuda</h5>
+                <button id="limpiar_modal_anadir_nota" style="outline:none;" type="button" class="close"
+                    data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">                
+                    <div class="form-group">
+                        <!-- textarea para añadir una nueva nota  -->
+                        <textarea maxlength="1500" rows="10" cols="10" class="form-control" id="textarea_correo_maquetado"
+                            name="textarea_correo_maquetado" value="" required></textarea>
+                    </div>                
+            </div>
+            <div class="modal-footer">
+            <button id="btn_copiar_correo_maquetado" type="button" class="btn btn-success">Copiar</button>
             </div>
         </div>
     </div>
@@ -248,7 +360,7 @@ $(document).ready(function() {
             },
             {
                 data: 'nombre'
-            },            
+            },
             {
                 data: 'usuario_medellin'
             },
