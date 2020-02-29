@@ -20,23 +20,24 @@
                 </a>
             </li>
 
-            <!-- Opción administración -->
-            <li class="nav-item {{ ($activePage == '' || $activePage == 'user-management') ? ' active' : '' }}">
+            <!-- Gestionar usuarios -->
+            <li class="nav-item{{ $activePage == 'gestionar-usuarios' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('usuarios') }}">
+                    <i class="material-icons">assignment_ind</i>
+                    <span class="sidebar-normal"> {{ __('Gestionar Usuarios') }} </span>
+                </a>
+            </li>
+
+            <!-- Opción Credenciales -->
+            <li class="nav-item {{ ($activePage == '' || $activePage == 'credenciales') ? ' active' : '' }}">
                 <a class="nav-link collapse" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
                     <i class="material-icons">assignment</i>
-                    <p>{{ __('Administración') }}
+                    <p>{{ __('Credenciales') }}
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="laravelExample">
                     <ul class="nav">
-                        <!-- Gestionar usuarios -->
-                        <li class="nav-item{{ $activePage == 'gestionar-usuarios' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('usuarios') }}">
-                                <i class="material-icons">assignment_ind</i>
-                                <span class="sidebar-normal"> {{ __('Gestionar Usuarios') }} </span>
-                            </a>
-                        </li>
                         <!-- Importar credenciales -->
                         <li class="nav-item{{ $activePage == 'importar_credenciales' ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('importar_credenciales') }}">
@@ -53,6 +54,7 @@
                         </li>
                     </ul>
                 </div>
+                <!-- Cerrar sesión -->
             <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i

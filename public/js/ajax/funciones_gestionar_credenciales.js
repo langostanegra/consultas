@@ -223,7 +223,11 @@ $(document).on('click', '.checkbox_comprobar', function () {
                     text: 'Algo salió mal',
                 })
             }
-        })
+        }).done(function () {
+            setTimeout(function () {
+                $("#overlay").fadeOut(300);
+            }, 500);
+        });
     } else {
         // Hacer algo si el checkbox ha sido deseleccionado
         var estado = 0;
@@ -255,7 +259,11 @@ $(document).on('click', '.checkbox_comprobar', function () {
                     text: 'Algo salió mal',
                 })
             }
-        })
+        }).done(function () {
+            setTimeout(function () {
+                $("#overlay").fadeOut(300);
+            }, 500);
+        });
     }
 });
 
@@ -462,7 +470,7 @@ $(document).on('click', '#variable_mensaje_dinamico', function () {
     document.getElementById("mensaje_dinamico").value = texto_textarea + variable;
 });
 
-//Función para obtener todas las variables
+//Función para enviar a la base de datos el correo maqueteado
 $(document).on('click', '.btn_submit_mensaje_dinamico', function () {
     var token = $('input[name=_token]').val();
     var plantilla = document.getElementById("mensaje_dinamico").value;
@@ -507,7 +515,6 @@ $(document).on('click', '.btn_modal_maquetar_correo_electronico', function () {
             'cedula': cedula,
         },
         success: function (data) {
-            // alert(data);
             document.getElementById("textarea_correo_maquetado").value = data;
             $("#modal_correo_maquetado").modal();
         },
@@ -517,13 +524,11 @@ $(document).on('click', '.btn_modal_maquetar_correo_electronico', function () {
                 title: 'Oops...',
                 text: 'Algo salió mal',
             })
-            console.log(data);
         }
     })
 });
 
 //Función para copiar al portapapeles el textarea del correo maquetado
-
 var copiar_textarea_correo = document.getElementById("btn_copiar_correo_maquetado"),
     input = document.getElementById("textarea_correo_maquetado");
 
@@ -538,5 +543,5 @@ copiar_textarea_correo.addEventListener("click", function (event) {
         title: 'Correo copiado',
         showConfirmButton: false,
         timer: 1500
-      })
+    })
 });

@@ -16,7 +16,7 @@ class GestionarCredencialesController extends Controller
 {
     public function index(){
         $plantilla_correo = MakeEmailTemplate::select('plantilla')->where('id', 1)->get();
-        return view('gestionar_credenciales.index')->with(compact('plantilla_correo'));
+        return view('gestionar_credenciales.index')->with(compact('plantilla_correo'));          
     }
 
     public function mostrar_credenciales(Request $request){
@@ -135,7 +135,7 @@ class GestionarCredencialesController extends Controller
         
         foreach($array as $clave => $valor){
             $new_array["##".$clave."##"] = $valor;
-        }        
+        }
         
         $mensaje_final = str_replace(array_keys($new_array), $new_array, $str);
         return $mensaje_final;

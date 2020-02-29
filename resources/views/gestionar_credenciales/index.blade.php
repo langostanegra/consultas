@@ -288,7 +288,7 @@
                         <!-- textarea para añadir una nueva nota  -->
                         <textarea maxlength="1500" rows="10" cols="10" class="form-control" id="textarea_correo_maquetado"
                             name="textarea_correo_maquetado" value="" required></textarea>
-                    </div>                
+                    </div>
             </div>
             <div class="modal-footer">
             <button id="btn_copiar_correo_maquetado" type="button" class="btn btn-success">Copiar</button>

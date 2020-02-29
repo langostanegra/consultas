@@ -19,10 +19,17 @@
     <!-- SweetAlert2 -->
     <link href="{{ asset('css/sweetalert/sweetalert2.css')}}" rel="stylesheet" />
     <link href="{{ asset('css/sweetalert/sweetalert2.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/loading_spinner.css')}}" rel="stylesheet" />
     
     </head>
     
     <body class="{{ $class ?? '' }}">
+    <div id="overlay">
+	<div class="cv-spinner">
+		<span class="spinner"></span>
+	</div>
+    </div>
+
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
