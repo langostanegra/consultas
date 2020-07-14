@@ -15,7 +15,7 @@
         </div>
         <div class="card-body">
             <div class="col-12 text-right">
-                <button type="button"
+                <button id="limpiar_modal_anadir_credencial" type="button"
                     class="btn btn-sm btn-primary boton_anadir_credencial_usuario">{{ __('Añadir credencial') }}</button>
             </div>
             <table id="data_table_credenciales" class="table table-striped table-bordered" style="width:100%">
@@ -106,7 +106,7 @@
         </div>
         <div class="container-fluid">
             <div class="col-12 text-right">
-                <button type="button" class="btn btn btn-primary btn_submit_mensaje_dinamico">Crear</button>
+                <button type="button" class="btn btn btn-primary btn_submit_mensaje_dinamico">Guardar</button>
             </div>
         </div><br>
         </form>
@@ -120,7 +120,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Añadir una nueva credencial de usuario</h5>
-                <button id="limpiar_modal_anadir_credencial" style="outline:none;" type="button" class="close"
+                <button style="outline:none;" type="button" class="close"
                     data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

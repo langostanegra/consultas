@@ -30,13 +30,13 @@
 
             <!-- Opción Credenciales -->
             <li class="nav-item {{ ($activePage == '' || $activePage == 'credenciales') ? ' active' : '' }}">
-                <a class="nav-link collapse" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
+                <a class="nav-link collapse" data-toggle="collapse" href="#credenciales_colapse" aria-expanded="false">
                     <i class="material-icons">assignment</i>
                     <p>{{ __('Credenciales') }}
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse" id="laravelExample">
+                <div class="collapse" id="credenciales_colapse">
                     <ul class="nav">
                         <!-- Importar credenciales -->
                         <li class="nav-item{{ $activePage == 'importar_credenciales' ? ' active' : '' }}">
@@ -54,7 +54,17 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Cerrar sesión -->
+            </li>
+
+            <!-- Configuración -->
+            <li class="nav-item{{ $activePage == 'configuracion' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('configuracion') }}">
+                    <i class="material-icons">settings</i>
+                    <span class="sidebar-normal"> {{ __('Configuración') }} </span>
+                </a>
+            </li>
+
+            <!-- Cerrar sesión -->
             <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
@@ -63,6 +73,7 @@
                 </a>
                 </a>
             </li>
+
             <!-- Finish opción Administración -->
 
             <!-- Importar Usuarios -->

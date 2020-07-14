@@ -66,3 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 	//Ruta para cambiar el estado de una credencial que está en proceso de revisión
 	Route::put('cambiar_estado_credencial/{estado}','GestionarCredencialesController@cambiar_estado_credencial')->name('cambiar_estado_credencial');
 });
+
+// Grupo de rutas para la vista de configuración
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('configuracion', 'ConfiguracionController@index')->name('configuracion');
+});
